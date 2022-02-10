@@ -15,7 +15,7 @@ jobs:
       - name: Install
         run: npm ci
       - name: Update gist
-        run: node ./dist/index.js
+        run: node ./index.js
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           GIST_ID: cb776a9c2f34936636371fe979440656
