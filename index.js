@@ -13,7 +13,7 @@ const wakatime = new WakaTimeClient(wakatimeApiKey);
 const octokit = new Octokit({ auth: `token ${githubToken}` });
 
 async function main() {
-  const stats = await wakatime.getMyStats({ range: RANGE.LAST_YEAR });
+  const stats = await wakatime.getMyStats({ range: RANGE.LAST_7_DAYS });
   await updateGist(stats);
 }
 
@@ -26,7 +26,7 @@ async function updateGist(stats) {
   }
 
   const lines = [];
-  for (let i = 0; i < stats.data.languages.length; i++) {
+  for (let i = 0; i < Math.min(stats.data.languages.length, 4); i++) {
     const data = stats.data.languages[i];
     const { name, percent, text: time } = data;
 
